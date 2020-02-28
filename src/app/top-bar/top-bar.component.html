@@ -1,0 +1,21 @@
+<mat-toolbar [color]="'primary'">
+  <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+    <mat-icon *ngIf="!menuTrigger.menuOpen">menu</mat-icon>
+    <mat-icon *ngIf="menuTrigger.menuOpen">menu_open</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #menu>
+  <button mat-menu-item routerLink="play-area" routerLinkActive="active">
+    <mat-icon>play_circle_outline</mat-icon>
+    <span>Play</span>
+  </button>
+  <button mat-menu-item routerLink="highscore-list" routerLinkActive="active">
+    <mat-icon>score</mat-icon>
+    <span>Highscore</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Log out</span>
+  </button>
+</mat-menu>
