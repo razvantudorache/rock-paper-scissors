@@ -1,1 +1,54 @@
-<p>play-area works!</p>
+<div class="startGameContainer" *ngIf="!hasPlayerAlready">
+  <mat-form-field class="playerName">
+    <input matInput placeholder="Player name" [(ngModel)]="playerName">
+  </mat-form-field>
+
+  <button mat-icon-button [color]="'primary'" class="playButton" (click)="startGame()">
+    <mat-icon>play_circle_outline</mat-icon>
+  </button>
+</div>
+
+<div class="playGameContainer" *ngIf="hasPlayerAlready">
+  <!-- PLAYER AREA  -->
+  <mat-card class="player">
+
+    <mat-card-header>
+      <mat-card-title>{{playerName}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="item" (click)="selectWeapon('rock', $event)">
+        <img class="image" src="../../assets/rock.png">
+      </div>
+
+      <div class="item" (click)="selectWeapon('paper', $event)">
+        <img class="image" src="../../assets/paper.png">
+      </div>
+
+      <div class="item" (click)="selectWeapon('scissors', $event)">
+        <img class="image" src="../../assets/scissors.png">
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="versusContainer">
+    <img class="versusImage" src="../../assets/versus.png">
+  </div>
+
+  <!-- COMPUTER AREA  -->
+  <mat-card class="computer">
+    <mat-card-header>
+      <mat-card-title>Computer</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-spinner *ngIf="!computerWeapon"></mat-spinner>
+
+      <div *ngIf="computerWeapon" class="item selected">
+        <img class="image" src="../../assets/{{computerWeapon}}.png">
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+

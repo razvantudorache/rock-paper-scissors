@@ -1,0 +1,96 @@
+app-play-area {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .startGameContainer {
+    min-width: 30vw;
+    max-width: 50vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .playerName {
+      min-width: 20vw;
+      max-width: 30vw;
+    }
+
+    .playButton {
+      margin-top: 20px;
+    }
+
+    .playButton, .mat-button-wrapper, .mat-icon {
+      width: 150px;
+      height: 150px;
+    }
+
+    .mat-icon {
+      font-size: 150px;
+      line-height: normal;
+    }
+  }
+
+  .playGameContainer {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+
+    .mat-card {
+      flex: 1;
+      max-width: 40vw;
+      margin: 40px;
+      display: flex;
+      flex-direction: column;
+      .mat-card-header {
+        height: 40px;
+      }
+
+      .mat-card-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        position: relative;
+      }
+    }
+
+    .player {
+      .mat-card-content {
+        flex-wrap: wrap;
+      }
+    }
+
+    .item {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      cursor: pointer;
+      &.selected {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ffffff;
+      }
+
+      .image {
+        width: 70%;
+      }
+    }
+
+    .versusContainer {
+      display: flex;
+      align-items: center;
+      .versusImage {
+        width: 100px;
+      }
+    }
+
+  }
+}

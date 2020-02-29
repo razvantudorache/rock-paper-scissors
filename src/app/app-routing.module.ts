@@ -8,11 +8,12 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "play-area"
+    redirectTo: "play-area/new"
   },
   {
-    path: "play-area",
+    path: "play-area/:status",
     component: PlayAreaComponent
+    //TODO this state must verify the value from store in order to redirect user to the right path with the right status. router guard?
   },
   {
     path: "highscore-list",
