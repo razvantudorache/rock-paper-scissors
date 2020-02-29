@@ -1,0 +1,18 @@
+<div class="startGameContainer">
+  <mat-form-field class="playerName">
+    <input #playerNameRef="ngModel" required minlength="3" matInput placeholder="Player name" [(ngModel)]="playerName">
+
+    <mat-error *ngIf="playerNameRef.invalid">
+      <div *ngIf="playerNameRef.errors.required">
+        Name is required.
+      </div>
+      <div *ngIf="playerNameRef.errors.minlength">
+        Name must be at least 3 characters long.
+      </div>
+    </mat-error>
+  </mat-form-field>
+
+  <button [disabled]="playerNameRef.invalid" mat-icon-button [color]="'primary'" class="playButton" (click)="startGame()">
+    <mat-icon>play_circle_outline</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,38 @@
+<div class="playGameContainer">
+  <!-- PLAYER AREA  -->
+  <mat-card class="player">
+
+    <mat-card-header>
+      <mat-card-title>{{playerName}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <div *ngFor="let item of weapons" class="item" (click)="selectWeapon(item, $event)">
+        <img class="image" src="../../assets/{{item}}.png">
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="versusContainer">
+    <img class="versusImage" src="../../assets/versus.png">
+  </div>
+
+  <!-- COMPUTER AREA  -->
+  <mat-card class="computer">
+
+    <mat-card-header>
+      <mat-card-title>Computer</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-spinner *ngIf="!computerWeapon.length"></mat-spinner>
+
+      <div *ngIf="computerWeapon.length" class="item selected">
+        <img class="image" src="../../assets/{{computerWeapon}}.png">
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+

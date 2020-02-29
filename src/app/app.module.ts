@@ -14,15 +14,19 @@ import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatDialogModule } from "@angular/material/dialog";
 import { HighscoreListComponent } from './highscore-list/highscore-list.component';
-import { PlayAreaComponent } from './play-area/play-area.component';
+import { PlayGameComponent } from './play-game/play-game.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { ResultDialogComponent } from './play-game/result-dialog/result-dialog.component';
+import { StartGameComponent } from './start-game/start-game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HighscoreListComponent,
-    PlayAreaComponent,
-    TopBarComponent
+    PlayGameComponent,
+    TopBarComponent,
+    ResultDialogComponent,
+    StartGameComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,10 @@ import { TopBarComponent } from './top-bar/top-bar.component';
     MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ResultDialogComponent
+  ]
 })
 export class AppModule {
 }

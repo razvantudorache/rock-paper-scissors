@@ -1,0 +1,10 @@
+.resultDialog {
+  app-result-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .mat-dialog-content {
+      flex: 1;
+    }
+  }
+}

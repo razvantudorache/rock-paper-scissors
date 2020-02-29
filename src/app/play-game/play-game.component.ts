@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { PlayAreaService } from "./play-area.service";
-import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { ResultDialogComponent } from './result-dialog/result-dialog.component';
 
 const ROCK: string = "rock";
 const PAPER: string = "paper";
@@ -26,48 +26,28 @@ const LOSS: string = "loss";
  */
 
 @Component({
-  selector: 'app-play-area',
-  templateUrl: './play-area.component.html',
-  styleUrls: ['./play-area.component.scss'],
+  selector: 'app-play-game',
+  templateUrl: './play-game.component.html',
+  styleUrls: ['./play-game.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class PlayAreaComponent implements OnInit {
+export class PlayGameComponent implements OnInit {
   public playerName: string = sessionStorage.getItem("playerName");
 
-  // determine if the player name is already stored on session
-  public hasPlayerAlready: boolean = !!sessionStorage.getItem("playerName");
-
+  // map with game rules
   private gameRules: {} = {};
 
+  // computer selection
   public computerWeapon: string = "";
 
-  constructor(private playAreaService: PlayAreaService,
-              private route: Router) {
+  // make constant to be usable in template
+  public weapons = WEAPONS;
+
+  constructor(private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.iniEvents();
-
     this.initGameRules();
-  }
-
-  /**
-   * Initialize all events used in play area page
-   */
-  private iniEvents() {
-    // on log out the player name is removed from session
-    this.playAreaService.removePlayerEvent.subscribe(() => {
-      // remove player name from session
-      sessionStorage.removeItem("playerName");
-
-      // reset player name
-      this.playerName = "";
-
-      // reset variable that controls what view should be displayed on play area page
-      this.hasPlayerAlready = false;
-
-      this.route.navigate(['/play-area', "new"]);
-    });
   }
 
   /**
@@ -102,21 +82,6 @@ export class PlayAreaComponent implements OnInit {
   }
 
   /**
-   * Store player name on session
-   */
-  startGame() {
-    if (this.playerName.trim().length) {
-      sessionStorage.setItem("playerName", this.playerName);
-
-      this.hasPlayerAlready = true;
-
-      this.route.navigate(['/play-area', "start"]);
-    } else {
-      //TODO validation error
-    }
-  }
-
-  /**
    * Action performed on rock/paper/scissors selection
    * @param playerWeapon
    * @param $event
@@ -124,9 +89,29 @@ export class PlayAreaComponent implements OnInit {
   selectWeapon(playerWeapon: string, $event) {
     this.computerWeapon = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
 
-    PlayAreaComponent.setClassOnSelectedItem($event.currentTarget);
+    PlayGameComponent.setClassOnSelectedItem($event.currentTarget);
 
-    console.log(this.gameRules[playerWeapon][this.computerWeapon]);
+    this.openResultDialog(this.gameRules[playerWeapon][this.computerWeapon]);
+  }
+
+  /**
+   * Open dialog with the result of the game between user and computer
+   * @param result
+   */
+  private openResultDialog(result) {
+    const dialogRef = this.dialog.open(ResultDialogComponent, {
+      autoFocus: false,
+      panelClass: "resultDialog",
+      minHeight: "150px",
+      minWidth: "450px",
+      data: {
+        result: result
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.resetGame();
+    });
   }
 
   /**
@@ -144,6 +129,9 @@ export class PlayAreaComponent implements OnInit {
     target.className = selectedItemClasses;
   }
 
+  /**
+   * Reset user and computer selection when result dialog is closed
+   */
   public resetGame() {
     this.computerWeapon = "";
 

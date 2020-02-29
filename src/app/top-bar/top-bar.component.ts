@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { PlayAreaService } from "../play-area/play-area.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -9,7 +9,7 @@ import { PlayAreaService } from "../play-area/play-area.service";
 })
 export class TopBarComponent implements OnInit {
 
-  constructor(private playAreaService: PlayAreaService) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,7 +18,11 @@ export class TopBarComponent implements OnInit {
    * Log out action
    */
   logOut() {
-    this.playAreaService.removePlayerEvent.emit();
+    // remove player name from session
+    sessionStorage.removeItem("playerName");
+
+    // navigate to the main route
+    this.router.navigateByUrl('/start-game');
   }
 
 }
