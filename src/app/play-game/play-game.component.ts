@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog } from '@angular/material/dialog';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
+import * as _ from 'lodash';
 
 const ROCK: string = "rock";
 const PAPER: string = "paper";
@@ -42,6 +43,8 @@ export class PlayGameComponent implements OnInit {
 
   // make constant to be usable in template
   public weapons = WEAPONS;
+
+  private selectedItem;
 
   constructor(private dialog: MatDialog) {
   }
@@ -89,7 +92,9 @@ export class PlayGameComponent implements OnInit {
   selectWeapon(playerWeapon: string, $event) {
     this.computerWeapon = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
 
-    PlayGameComponent.setClassOnSelectedItem($event.currentTarget);
+    this.selectedItem = $event.currentTarget;
+
+    this.setClassOnSelectedItem();
 
     this.openResultDialog(this.gameRules[playerWeapon][this.computerWeapon]);
   }
@@ -116,17 +121,18 @@ export class PlayGameComponent implements OnInit {
 
   /**
    * Set "selected" class on clicked item
-   * @param target
    */
-  private static setClassOnSelectedItem(target) {
-    let selectedItemClasses = target.className;
+  private setClassOnSelectedItem() {
+    // trim class name string because the "selected" class is replaced with empty string and added with empty string in front of it
+    // this prevents multiple spaces between original classes and the "selected" class
+    let selectedItemClasses = this.selectedItem.className.trim();
 
     // prevent adding multiple 'selected' class on the same element
     if (selectedItemClasses.indexOf("selected") === -1) {
       selectedItemClasses += " selected";
     }
 
-    target.className = selectedItemClasses;
+    this.selectedItem.className = selectedItemClasses;
   }
 
   /**
@@ -135,6 +141,7 @@ export class PlayGameComponent implements OnInit {
   public resetGame() {
     this.computerWeapon = "";
 
-    //remove selected classes from player area
+    // remove selected class in order to have all options available again
+    this.selectedItem.className = _.replace(this.selectedItem.className, "selected", "");
   }
 }
