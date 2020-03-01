@@ -25,7 +25,7 @@ export class StartGameComponent implements OnInit {
     if (this.playerNameRef.valid) {
       sessionStorage.setItem("playerName", this.playerName);
 
-      this.router.navigateByUrl('/play-game');
+      this.router.navigateByUrl('/play');
     }
   }
 

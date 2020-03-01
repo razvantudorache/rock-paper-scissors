@@ -11,20 +11,20 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "start-game"
+    redirectTo: "start"
   },
   {
-    path: "start-game",
+    path: "start",
     component: StartGameComponent,
     canActivate: [StartGameGuard]
   },
   {
-    path: "play-game",
+    path: "play",
     component: PlayGameComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: "highscore-list",
+    path: "highscore",
     component: HighscoreListComponent,
     canActivate: [AuthGuard]
   }

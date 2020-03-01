@@ -59,8 +59,10 @@ app-play-game {
     .versusContainer {
       display: flex;
       align-items: center;
+      justify-content: center;
+      flex: 0.3;
       .versusImage {
-        width: 100px;
+        width: 100%;
       }
     }
 

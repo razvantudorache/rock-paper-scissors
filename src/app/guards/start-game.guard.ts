@@ -17,7 +17,7 @@ export class StartGameGuard implements CanActivate {
 
     // if the user is logged, redirect it to the play route
     if (isLogged) {
-      this.router.navigateByUrl("/play-game");
+      this.router.navigateByUrl("/play");
       return false;
     } else {
       return true;

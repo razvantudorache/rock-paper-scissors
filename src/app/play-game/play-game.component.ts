@@ -2,15 +2,16 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
 import * as _ from 'lodash';
+import { HttpClient } from '@angular/common/http';
 
-const ROCK: string = "rock";
-const PAPER: string = "paper";
-const SCISSORS: string = "scissors";
+const ROCK: string = 'rock';
+const PAPER: string = 'paper';
+const SCISSORS: string = 'scissors';
 const WEAPONS: string[] = [ROCK, PAPER, SCISSORS];
 
-const DRAW: string = "draw";
-const WIN: string = "win";
-const LOSS: string = "loss";
+const DRAW: string = 'draw';
+const WIN: string = 'win';
+const LOSS: string = 'loss';
 
 /**
  * GAME RULES
@@ -33,20 +34,21 @@ const LOSS: string = "loss";
   encapsulation: ViewEncapsulation.None
 })
 export class PlayGameComponent implements OnInit {
-  public playerName: string = sessionStorage.getItem("playerName");
+  public playerName: string = sessionStorage.getItem('playerName');
 
   // map with game rules
   private gameRules: {} = {};
 
   // computer selection
-  public computerWeapon: string = "";
+  public computerWeapon: string = '';
 
   // make constant to be usable in template
   public weapons = WEAPONS;
 
   private selectedItem;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -106,9 +108,9 @@ export class PlayGameComponent implements OnInit {
   private openResultDialog(result) {
     const dialogRef = this.dialog.open(ResultDialogComponent, {
       autoFocus: false,
-      panelClass: "resultDialog",
-      minHeight: "150px",
-      minWidth: "450px",
+      panelClass: 'resultDialog',
+      minHeight: '150px',
+      minWidth: '450px',
       data: {
         result: result
       }
@@ -128,8 +130,8 @@ export class PlayGameComponent implements OnInit {
     let selectedItemClasses = this.selectedItem.className.trim();
 
     // prevent adding multiple 'selected' class on the same element
-    if (selectedItemClasses.indexOf("selected") === -1) {
-      selectedItemClasses += " selected";
+    if (selectedItemClasses.indexOf('selected') === -1) {
+      selectedItemClasses += ' selected';
     }
 
     this.selectedItem.className = selectedItemClasses;
@@ -139,9 +141,9 @@ export class PlayGameComponent implements OnInit {
    * Reset user and computer selection when result dialog is closed
    */
   public resetGame() {
-    this.computerWeapon = "";
+    this.computerWeapon = '';
 
     // remove selected class in order to have all options available again
-    this.selectedItem.className = _.replace(this.selectedItem.className, "selected", "");
+    this.selectedItem.className = _.replace(this.selectedItem.className, 'selected', '');
   }
 }

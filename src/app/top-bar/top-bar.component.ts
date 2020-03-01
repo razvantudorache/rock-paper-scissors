@@ -22,7 +22,7 @@ export class TopBarComponent implements OnInit {
     sessionStorage.removeItem("playerName");
 
     // navigate to the main route
-    this.router.navigateByUrl('/start-game');
+    this.router.navigateByUrl('/start');
   }
 
 }

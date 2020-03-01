@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       // if user is not logged, redirect it to the main route
-      this.router.navigateByUrl("/start-game");
+      this.router.navigateByUrl("/start");
       return false;
     }
   }
