@@ -14,41 +14,47 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 import { HighscoreListComponent } from './highscore-list/highscore-list.component';
 import { PlayGameComponent } from './play-game/play-game.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ResultDialogComponent } from './play-game/result-dialog/result-dialog.component';
 import { StartGameComponent } from './start-game/start-game.component';
+import { MomentPipe } from './pipes/moment.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HighscoreListComponent,
-    PlayGameComponent,
-    TopBarComponent,
-    ResultDialogComponent,
-    StartGameComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatCardModule,
-    MatInputModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-    MatDialogModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    ResultDialogComponent
-  ]
+    declarations: [
+        AppComponent,
+        HighscoreListComponent,
+        PlayGameComponent,
+        TopBarComponent,
+        ResultDialogComponent,
+        StartGameComponent,
+        MomentPipe
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatCardModule,
+        MatInputModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatTableModule,
+        MatSortModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    entryComponents: [
+        ResultDialogComponent
+    ]
 })
 export class AppModule {
 }

@@ -26,6 +26,8 @@ export class StartGameComponent implements OnInit {
       sessionStorage.setItem("playerName", this.playerName);
 
       this.router.navigateByUrl('/play');
+
+      //TODO insert user into DB
     }
   }
 

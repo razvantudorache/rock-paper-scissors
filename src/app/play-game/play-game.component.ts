@@ -99,6 +99,8 @@ export class PlayGameComponent implements OnInit {
     this.setClassOnSelectedItem();
 
     this.openResultDialog(this.gameRules[playerWeapon][this.computerWeapon]);
+
+    //TODO update user score
   }
 
   /**

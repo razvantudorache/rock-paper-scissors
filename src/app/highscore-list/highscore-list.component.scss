@@ -1,0 +1,14 @@
+app-highscore-list {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  .highscoreContainer {
+    margin: 30px 0;
+    width: 80vw;
+    overflow: auto;
+    border: 1px solid rgba(0,0,0,.12);
+    .mat-table {
+      width: 100%;
+    }
+  }
+}

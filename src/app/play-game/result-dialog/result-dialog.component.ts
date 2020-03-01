@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessageInterface } from "./message.interface";
 
+// messages map that will be displayed in dialog based on the game results
 const MESSAGES: {} = {
   "win": <MessageInterface>{
     title: "Win",
