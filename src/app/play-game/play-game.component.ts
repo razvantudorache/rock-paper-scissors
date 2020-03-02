@@ -3,15 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ResultDialogComponent } from './result-dialog/result-dialog.component';
 import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
-
-const ROCK: string = 'rock';
-const PAPER: string = 'paper';
-const SCISSORS: string = 'scissors';
-const WEAPONS: string[] = [ROCK, PAPER, SCISSORS];
-
-const DRAW: string = 'draw';
-const WIN: string = 'win';
-const LOSS: string = 'loss';
+import { PlayGameService } from './play-game.service';
 
 /**
  * GAME RULES
@@ -43,47 +35,17 @@ export class PlayGameComponent implements OnInit {
   public computerWeapon: string = '';
 
   // make constant to be usable in template
-  public weapons = WEAPONS;
+  public weapons = this.playGameService.getGameWeapons();
 
   private selectedItem;
 
   constructor(private dialog: MatDialog,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private playGameService: PlayGameService) {
   }
 
   ngOnInit(): void {
-    this.initGameRules();
-  }
-
-  /**
-   * Create map with game rules
-   */
-  private initGameRules() {
-    for (let i in WEAPONS) {
-      let playerWeapon = WEAPONS[i];
-
-      this.gameRules[playerWeapon] = {};
-
-      for (let j in WEAPONS) {
-        let computerWeapon = WEAPONS[j];
-
-        if (playerWeapon === computerWeapon) {
-
-          this.gameRules[playerWeapon][computerWeapon] = DRAW;
-
-        } else if ((playerWeapon === ROCK && computerWeapon === PAPER) ||
-          (playerWeapon === PAPER && computerWeapon === SCISSORS) ||
-          (playerWeapon === SCISSORS && computerWeapon === ROCK)) {
-
-          this.gameRules[playerWeapon][computerWeapon] = LOSS;
-
-        } else {
-
-          this.gameRules[playerWeapon][computerWeapon] = WIN;
-
-        }
-      }
-    }
+    this.gameRules = this.playGameService.getGameRules();
   }
 
   /**
@@ -92,7 +54,7 @@ export class PlayGameComponent implements OnInit {
    * @param $event
    */
   selectWeapon(playerWeapon: string, $event) {
-    this.computerWeapon = WEAPONS[Math.floor(Math.random() * WEAPONS.length)];
+    this.computerWeapon = this.weapons[Math.floor(Math.random() * this.weapons.length)];
 
     this.selectedItem = $event.currentTarget;
 
